@@ -1,0 +1,59 @@
+(* LAST UPDATE: 30/06/2017 *)
+
+I ::= "title:    Virtual Johnny\n"
+    ^ "author:   Gurteee &lt;software@sukkology.net&gt;\n"
+    ^ "language: italian\n"
+    ^ "status:   inherently wrong\n"
+    ^ "audience: tutti\n"
+    ^ "comment:  Pubblico dominio\n"
+    ^ "created:  27/02/2015"
+;
+
+(* LETTERE ACCENTATE - CONSOLE *)
+(*
+A := a';
+E := e';
+EC := "E'";
+EA := e';
+IG := i';
+O := o';
+U := u';
+*)
+
+(* HTML *)
+A := "&agrave;";
+E := "&egrave;";
+EC := "&Egrave;";
+EA := "&eacute;";
+IG := "&igrave;";
+O := "&ograve;";
+U := "&ugrave;";
+
+(* COMMODITY *)
+PERCHE := perch ^EA;
+PIU := pi ^U;
+(*******************************)
+
+S := \ FRASE (*(+++++++++++++++^ "\n" ^ S | _)*);
+
+FRASE ::= >> FTIPO01 ^"." <<;
+
+MOMENTO ::= oggi [pomeriggio] | stamattina | stasera | domani;
+MOMPASS ::= [l'altro] ieri | sabato scorso | domenica scorsa | lo scorso weekend;
+VERBO1 ::= E ((mort | mancat | --esplos | ---implos) ^(M: o | F: a) | (rimast ^(M: o | F: a) (a piedi | senza benzina)));
+PARTICIPIO ::= (uccis | ammazzat | suicidat | crocifiss | impiccat | gambizzat | investit | lobotomizzat | sparat | mutilat | squartat | imbalsamat | bruciat | incendiat | impalat);
+VERBO2 ::= si E PARTICIPIO ^(M: o | F: a);
+VERBO3 ::= hanno (PARTICIPIO ^o | bruciato sul rogo | condannato a morte | beccato che si drogava | chiamato alle armi | denunciato | arrestato | portato in caserma);
+MATERIA ::= latino | lettere | storia | matematica | filosofia | disegno | storia dell'arte | inglese | francese | tedesco | swahili | polacco | ceco | rumeno | bulgaro | russo;
+PERSONA1 ::= M: (vicino | gatto | cane | gnu | struzzo | toro | manzo | vitello | ornitorinco | pappagallo | roditore | criceto | muflone | girasole | professore di MATERIA)
+	| F: (vicina | mucca | capra | zebra | professoressa di MATERIA)
+	;
+PERSONA2 ::= M1: mio (vicino [di casa])
+	| M2: mio (cugino | zio)
+	| F1: mia (vicina [di casa])
+	| F2: mia (cugina | zia)
+	;
+SOGGETTO ::= M: (il mio PERSONA1 | ((M1: il | M2: _) PERSONA2).(M1 | M2) | (il PERSONA1 (M1: del | M2: di | F1: della | F2: di) PERSONA2).(M1|M2|F1|F2))
+	 | F: (la mia PERSONA1 | ((F1: la | F2: _) PERSONA2).(F1 | F2) | (la PERSONA1 (M1: del | M2: di | F1: della | F2: di) PERSONA2).(M1|M2|F1|F2));
+MOTIVO ::= ({VERBO1 | VERBO2} {SOGGETTO}) | (VERBO3 SOGGETTO) | (((M1: il | F1: la) PERSONA2).(M1|M2|F1|F2) ha PARTICIPIO ^o (M: il mio | F: la mia) PERSONA1);
+FTIPO01 ::= (([MOMENTO] non posso | [MOMPASS] non ho potuto) [venire [a (bere | mangiare [la pizza])] [con voi] | partecipare | unirmi a voi] PERCHE MOTIVO).(M|F);
