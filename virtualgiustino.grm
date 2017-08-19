@@ -1,0 +1,482 @@
+(* LAST UPDATE: 23/07/2017 *)
+
+I ::= "title:    Virtual Giustino\n"
+    ^ "author:   Gurteee &lt;software@sukkology.net&gt;\n"
+    ^ "language: italian\n"
+    ^ "status:   inherently wrong\n"
+    ^ "audience: tutti\n"
+    ^ "comment:  Pubblico dominio\n"
+    ^ "created:  23/03/2010"
+;
+
+(* LETTERE ACCENTATE - CONSOLE *)
+(*
+A := a';
+E := e';
+EC := "E'";
+EA := e';
+IG := i';
+O := o';
+U := u';
+EXTRAPOLSKI := s|z|z|c|l|n;
+*)
+
+(* HTML *)
+A := "&agrave;";
+E := "&egrave;";
+EC := "&Egrave;";
+EA := "&eacute;";
+IG := "&igrave;";
+O := "&ograve;";
+U := "&ugrave;";
+NPOLSKI := "&#324;";
+EXTRAPOLSKI := "&#347;" | "&#378;" | "&#380;" | "&#263;" | "&#322;" | NPOLSKI;
+
+(* COMMODITY *)
+PERCHE := perch ^EA;
+PIU := pi ^U;
+(*******************************)
+
+S := \ FRASE (*(+++++++++++++++^ "\n" ^ S | _)*);
+
+FRASE ::= >> FTIPO01 | FTIPO02 | FTIPO03 | FTIPO04 | FTIPO05 | FTIPO06 | FTIPO07 | ++FTIPO10 <<;
+FTIPO01 ::= INTRO AFORISMA FINE;
+FTIPO02 ::= ["Vedi," | "Sai,"] AMICO ^ "," AFORISMA FINE;
+FTIPO03 ::= [([CARO] AMICO).(M|F) ^","] (sappi | volevo dirti) che AFORISMA FINE;
+FTIPO04 ::= [([CARO] AMICO).(M|F) ^","] (sapevi | ti ho [mai] detto | hai >(notato | sentito | visto)) che AFORISMA ^"?";
+FTIPO05 ::= [([CARO] AMICO).(M|F) ^","] AFORISMASENZAPREMESSE FINE;
+FTIPO05B ::= AFORISMASENZAPREMESSE FINE;
+FTIPO06 ::= (volevo dire | ho [appena] realizzato | mi sono [appena] reso conto | [a volte] penso | ho [appena] (scoperto | sentito [dire] | letto) | mi hanno [appena] (comunicato | riferito | detto)) che AFORISMA FINE;
+FTIPO07 ::= >(vi ho [mai] detto | avete [mai] >(notato | sentito | visto)) che AFORISMA ^"?";
+FTIPO10 ::= VAKKATASEMPLICE;
+
+(* Questi vanno richiamati apposta con l'opzione -S *)
+RISPOSTAMENZIONETWITTER ::= \ >(FTIPO01 | FTIPO05B | FTIPO06 | FTIPO07 | ++FTIPO10);
+RISPOSTATWITTERFIAT ::= \ >(FIAT | MACCHINA) FINE;
+RISPOSTATWITTERRICCO ::= \ (RICCO | DEPOSITO | MACCHINA | TASSE) FINE;
+RISPOSTATWITTERTASSE ::= \ TASSE FINE;
+RISPOSTATWITTERPETTO ::= \ NARCISISMOPETTO FINE;
+RISPOSTATWITTERPOLACCO ::= \ POLSKI FINE;
+RISPOSTATWITTERALLERGIA ::= \ ALLERGIA FINE;
+RISPOSTATWITTERMUSICA ::= \ MUSICA FINE;
+RISPOSTATWITTERCAUSA ::= \ CAUSA FINE;
+RISPOSTATWITTERCIBO ::= \ CIBO FINE;
+RISPOSTATWITTERSKATE ::= \ SKATE FINE;
+RISPOSTATWITTERKICKBOXING ::= \ KICKBOXING FINE;
+RISPOSTATWITTERNARCISISMO ::= \ NARCISISMO FINE;
+
+AFORISMA ::= BRUTALE | RICCO | TASSE | DEPOSITO | CAUSA | FIAT | NARCISISMO | POLSKI | ALLERGIA | MUSICA | KOMUNISMO | CIBO | SKATE | VIAGGIO | KICKBOXING;
+AFORISMASENZAPREMESSE ::= MACCHINA;
+
+INTRO ::= (_ | --"bau!" | --"Yo, Fratello!" | --"Dasvidania!" | --"Dzie" ^NPOLSKI "dobry!") \;
+FINE ::= ^ ("." | "..." | "!");
+
+CARO ::= car ^(M: o | F: a);
+GURTE ::= \ gurtee (^e)+;
+AMICOUMANO ::= \ (M: (gurt | GURTE | johnny | angelo | signor \simone | ernesto | andrea | bonz | opi | vittorio | mak | amico sk8r boi | compagno | tovarisch | sensei | legionario | steve | realgiustino) | F: (marta | valeria | chiara | "4:16" | linda | cinzia));
+AMICOTWITTER ::= "@" ^(M: (\sukkoPera | stevez1974 | falconmak | angelocavallo1 | \realGiustino | \reAndyBoy) | F: (ieia80 | solo_viola | psiche_erme));
+AMICO ::= AMICOUMANO (* | AMICOTWITTER *);
+(*
+NEMICO ::= batte | max | il tipo di "La Spezia" | claudio | alessandra;
+*)
+
+MOMENTO ::= (l'altro giorno | ieri | stamattina | una volta);
+
+BRUTALE ::= non uso la "Brutale" PERCHE >(E [troppo] >([s^] comoda | alta | bassa | --verde | --blu | troppo moto) | ha la sella [troppo] >(molle | dura) | fa [troppo] >(caldo | freddo) | ha [troppe [poche]] ruote | ha le ruote [troppo] [s^] gonfie | il >(gatto | cane | criceto | pesce rosso | pappagallo) non vuole).;
+
+RICCO ::= sono [(decisa | infinita | (e | ab)^ norme | schifosa | incredibil | inumana | incommensurabil | mostruosa | terribil | inconcepibil)^ mente] ([(-iper | ultra | stra | -mega | super)^])+ ricco.;
+
+TASSE ::= MOMENTO ho pagato NUMERO (milioni | miliardi | fantastiliardi) di tasse;
+
+DEPOSITO ::= vado al \deposito a fare un bagno tra MONETE;
+MONETE ::= i miei >(soldi | miliardi | milioni | fantastilioni | quattrini | >([quintali di] \ (talleri | dollari | euro | dobloni | pezzi da otto))) | le mie >(monete | \sterline);
+
+AVVOCATO ::= \ (giancarlo | gianfranco | folco);
+CAUSA ::= (hai|avete|hanno) pestato i piedi alla persona sbagliata |
+	avr ^(ai|A|ete|anno) mie notizie dai miei avvocati |
+	devo chiamare AVVOCATO ^"?";
+
+MARCHIOFIAT := "TIAF";
+(*
+FIAT ::= la MARCHIOFIAT fa COMPONENTE.P MATERIALE;
+COMPONENTE ::= S: >(il freno | l'acceleratore | la frizione | il cambio | il condizionatore | il differenziale | la batteria | l'accendisigari | il vivavoce) | P: >(i vetri | i tergicristalli | i finestrini | i paraurti | i cofani | le ruote | i volanti | le prese d'aria | i fari [allo \xeno] | i lavafari);
+*)
+FIAT ::= FIAT2 | FIAT3;
+SCELTA ::= di (seconda | terza | quarta | quinta | ennesima) (scelta | mano);
+MATERIALE1 ::= in (polistirolo [espanso] | plastica | terracotta | ceramica | porcellana | gomma [^piuma] | plexiglass | "PVC" | ghisa | pelle [di topo [morto]]) [cinese] [SCELTA];
+MATERIALE2 ::= con (il >(pongo | "DAS") [cinese] | i topi morti [cinesi]) [SCELTA];
+MATERIALE ::= >MATERIALE1 | >MATERIALE2;
+
+(*
+FIAT2 ::= COMPONENTE.S della mia MARCHIOFIAT fa "TRUC TRUC" |
+      >(non funziona (S: _ | P: ^no) PIU COMPONENTE della mia MARCHIOFIAT).(S|P) |
+      si sono rotti [di nuovo] COMPONENTE.P della mia MARCHIOFIAT;
+*)
+
+FIAT3 ::= "io non comprer" ^O "mai" [PIU] MARCHIOFIAT |
+	si E rotto un [altro] finestrino della mia MARCHIOFIAT |
+	ieri ho portato [di nuovo] la mia MARCHIOFIAT in officina |
+	la mia MARCHIOFIAT cade a (pezzi | brandelli) |
+	"ma figurati se compro un'altra" MARCHIOFIAT ^", con tutto quel che mi" E "successo" |
+	"forrrza," MARCHIOFIAT ^", vai" |
+	EC scaduta la garanzia della mia MARCHIOFIAT;
+
+COMPONENTE2 ::= MS: (il >(freno | cambio | condizionatore | differenziale | vivavoce | radiatore | carburatore) | l'^(acceleratore | accendisigari)) |
+		FS: la >(frizione | batteria | pompa >(del gasolio | della benzina | dell'acqua) | centralina) |
+		MP: (i >(vetri | tergicristalli | finestrini | paraurti | cofani | volanti | fari [allo \xeno] | lavafari | cilindri | pistoni) | gli iniettori) |
+		FP: le >(ruote | prese d'aria | candele | valvole);
+
+FIAT2 ::= (si (MS: E | FS: E | MP: sono | FP: sono) (rott | frantumat | graffiat | ingolfat | lacerat) ^ (MS: o | FS: a | MP: i | FP: e) [di nuovo] COMPONENTE2 della mia MARCHIOFIAT).(MS|FS|MP|FP) |
+	(COMPONENTE2 della mia MARCHIOFIAT fa (MP: ^nno | FP: ^nno) "TRUC TRUC").(MS|FS|MP|FP) |
+	({non funziona (MP: ^no | FP: ^no) PIU} {COMPONENTE2 della mia MARCHIOFIAT}).(MS|FS|MP|FP) |
+	(la MARCHIOFIAT fa COMPONENTE2 MATERIALE).(MP|FP);
+
+NARCISISMO ::= (ho ORGANO PIU AGGETTIVO).(MS|FS|MP|FP) de ^ >((M1: (l mondo | ll'universo | l pianeta | l cosmo) | F1: >(lla "Terra" | lla galassia)) [inter ^(M1: o | F1: a)]).(M1|F1);
+NARCISISMOPETTO ::= ho il petto PIU AGGETTIVO.MS de ^ >((M: (l mondo | ll'universo | l pianeta | l cosmo) | F: >(lla "Terra" | lla galassia | lla storia [universale])) [inter ^(M: o | F: a)]).(M|F);
+ORGANO ::= MS: (il (petto | pisello | sedere | naso | gomito | ginocchio | colon) | lo (sfintere | scroto)) |
+           FS: la (testa | chioma | bocca | schiena | muscolatura) |
+           MP: i piedi |
+           FP: le (spalle | ginocchia | mani | braccia | ossa);
+AGGETTIVO ::= >(>(bell | muscolos | maestos | virtuos | esagerat| superlativ) ^(MS: o | FS: a | MP: i | FP: e)) |
+              >(>(fantastic) ^(MS: o | FS: a | MP: i | FP: he)) |
+              >(>(grand | pregevol | sublim | spettacolar | adorabil | incredibil | inarrestabil) ^(MS: e | FS: e | MP: i | FP: i));
+
+POLSKI ::= non E vero che "\"" ^IMPRONUNCIABILE ^"\"" E "impronunciabile";
+IMPRONUNCIABILE ::= > >> (+sz | ++rz | ++k | +w | +sc | EXTRAPOLSKI) << (^ IMPRONUNCIABILE | ----_);
+
+MACCHINA ::= sono indeciso se cambiare la mia MARCHIOFIAT con un MACCHINONE o un MACCHINONE ^". Mah, mi sa che li prender" ^O "entrambi, intanto" RICCO;
+MACCHINONE ::= \ (x ^(3 | 5) | pajero | hummer | ferrari | lamborghini | "TT" | maserati | classe \e | de \tomaso | lotus | pagani | tesla);
+
+ALLERGIA ::= sono (allergico | intollerante) OGGALLERGIA;
+OGGALLERGIA ::= >> al >(formaggio ma non al (burro | ^la mozzarella) | (bianco | rosso) dell'uovo | tonno | buon senso | \mc ^ \donald's | frumento | mais | grano [^turco] | chinotto | ginger) |
+		alla (\coca \cola | \ sprite | \ fanta | gazzosa | birra | patata | mela | pera | pesca | caffeina | spuma | prugna) |
+		all' ^(uovo | uva | arancia | ananas | albicocca | aloe [vera] | aranciata | acqua [(frizzante | naturale)] | origano | orzata) |
+		alle pere |
+		allo (zenzero | zafferano) |
+		al cumino |
+		alla cocaina | all'eroina | al crack | alla marijuana | all'hashish | al fumo | alla cannabis
+		<<;
+
+STRUMENTO ::= (sax | piano | tastiera | oboe | [contro^] fagotto | violino | batteria | gong | tromba | trombone | [basso^] tuba | susafono | xilofono | vibrafono | marimba | clarinetto | flauto [(traverso | dolce)]);
+MUSICA1 ::= ho comprato un (corso di | metodo per) STRUMENTO | ho iniziato ad andare a lezione di STRUMENTO;
+MUSICA2 ::= (la chitarra | il basso) mi fa paura | gli accordi mi fanno paura;
+
+GRUPPO ::= il mio gruppo preferito sono GRUPPOKOMU |
+		ho comprato i biglietti per il prossimo concerto de ^GRUPPOKOMU |
+		GRUPPOKOMU sono il mio gruppo preferito |
+		adoro GRUPPOKOMU |
+		ascolto GRUPPOKOMU (da sempre | fin da tenera et^A) |
+		sono andato a tutti i concerti de ^GRUPPOKOMU |
+		non mi perdo un concerto de ^GRUPPOKOMU neanche morto ^"!" |
+		"spara, Jurij, spara!" |
+		"A ja ljublju SSSR";
+GRUPPOKOMU ::= i \ (++"CCCP" | "CSI" | persiana \jones | punkreas | porno \riviste) |
+			gli \ ("Ska-P" | africa \unite);
+			
+MUSICA ::= >(MUSICA1 | MUSICA2 | GRUPPO);
+
+KOMUNISMO ::= KOMUNISTA E il mio mentore | ho votato KOMUNISTA | alle prossime elezioni voter^O KOMUNISTA;
+KOMUNISTA ::= [il \compagno] \( stalin | lenin | marx | khrushchev | walter \ulbricht | erich \honecker | erich \mielke | fidel \castro | hugo \chavez | fassino | d'^\alema | veltroni | vendola | prodi | luxuria | diliberto | bertinotti | mara \scagni | matteotti | gramsci | berlinguer);
+
+CIFRAINIZIALE ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+CIFRA ::= 0 | CIFRAINIZIALE;
+NUMERONE ::= millemila | ventordici;
+NUMERO ::= (CIFRAINIZIALE ^ CIFRA [^CIFRA]) | NUMERONE;
+DECIMALE ::= CIFRAINIZIALE ^ CIFRA ^"." ^ CIFRAINIZIALE;
+VAKKATASEMPLICE ::= [ci vediamo ^","] "a prestissimo!" |
+	"Come come come???" |
+	"Che io sappia... Non saprei!" |
+	"Oh, la borsetta rigabile!" |
+	"No, oggi non esco" PERCHE "devo lavorare... Un aperitivo? OK, tra 10 minuti sono l" ^IG ^"!" |
+	"Noch zwei!" |
+	"No, qua no." |
+	"Uhm... Scopo prettamente ornamentale..." |
+	"Devo comprare un nuovo paio di scarpe," PERCHE "nessuno dei" NUMERO "che ho va bene." |
+	"Saluto Soul!" |
+	"Panie i panowie... To Warszawa!" |
+	"Spiegami un po' la storia degli aggettivi" [passati] "in giapponese!" |
+	("Prova a colpirmi con un" (M: _ | F: ^a) MOSSAKB ^"!").(M|F) |
+	"Vuoi vedere una capovolta ninja?" |
+	"Suonate troppo spesso Boys Don't Cry." |
+	"Ma certo che no!" |
+	"Questo non" E "un circolo ricreativo." |
+	"Tanken Sie, bitte!" |
+	EC PIU "facile a farsi che a dirsi!" |
+	"Far" ^O "fallire il Comune di Fubine." |
+	"Ho bandito \"alfa\" dalla mia tabella caratteri." |
+	"Data l'equazione 3x = 5x, moltiplichiamo entrambi i membri per x. Otteniamo 3 = 5, quindi l'equazione" E "impossibile." |
+	"L'acqua finir" ^A ^"." |
+	"Don't forget the key in the door. Like I did." |
+	"Ho comprato il cofanetto della" (millemillesima | ventordicesima) "serie dei Simpson." |
+	"Non posso venire a casa tua in moto" PERCHE "ci sono" DECIMALE (deci | centi | milli | micro | nano | pico | femto) ^metri "di ghiaia." |
+	"Il" (maggior | peggior) "terrore dei motociclisti" E "la ghiaia." |
+	"Domani vado a comprare" (un'altra | altre CIFRAINIZIALE) (moto | auto) ^"." |
+	EC "colpa del sistema." |
+	"Gasteropodi! Semplice, no?" |
+	"Stasera non voglio partecipare a lezioni di otorinolaringoiatria." |
+	"Ahhhhhhhhh i Comunisti!" |
+	"A Capodanno io propongo sempre la mia casettina al mare." |
+	"Il Polacco" E "un gran casino." |
+	"Sono ricco." |
+	"Aperitivino?" |
+	"Chiss" ^A "se nel fosso c'" ^E "ancora la nostra caffettiera..." |
+	"Quest'anno faccio poche ferie. Solo un mese e mezzo." |
+	"Alla faccia della Scagni!" |
+	MOMENTO "mi" E "crashato" (\windows [("3.1" | 95 | 98 | "ME" | "XP" | \vista | 7 | 8)] | \word | \excel | \powerpoint | \outlook [\express]) ^"." |
+	"E cosa vuoi bere su un aereo? (Se non birra)" |
+	"Dobbiamo assolutamente" (andare | tornare) [di nuovo] "in Polonia!" |
+	"Occhio all'autovelox!" |
+	"Queste strade le fanno troppo sottili." |
+	"Quella piacevole sensazione di vuoto..." |
+	"Come il leone con la sedia, no?" |
+	"Ruotami di 90 gradi." |
+	"Sei contentooo???" |
+	"Io sono entrato per primo, seguito da un ragazzo con cui ho fatto qualcosa..." |
+	"Ho trovato la pompa" PIU "lenta del mondo." |
+	"Io pago" NUMERO "megabit." |
+	"Rimpiango Visco come ministro del" (\ tesoro | ^le \ finanze) ^"." |
+	"Puoi urtarmi tutte le volte che vuoi." |
+	"Tranquillo, era solo aria." |
+	"Ma quale ricco e snob? Ti ricordo che sono solito abbeverarmi al cesso!" |
+	"Io sono Ges" ^U ^"."
+	;
+
+CIBO ::= "certamente che mangio" |
+	"svuoto una cambusa intera se voglio" |
+	"non prendo l'hamburger" PERCHE "poi ingrasso e perdo il mio" AGGETTIVO.MS "petto. Prender" ^O "solo" NUMERO "pizze." \ PIZZA |
+	"servi" ^(tore | trice) ^"!!!" |
+	"il mio kebab senza formaggio, per favore!" |
+	(c'^E del (^l'uovo | formaggio | grano | frumento) in quest ^(M: o | F: a) CIBOSAFE).(M|F) ^("?"|"!")
+	;
+CIBOSAFE ::= M: (gelato | [contro^] filetto [di (pollo | maiale | vitello | anatra)] | pesce [^spada] | posacenere | tartufo) |
+		F: (carne | tagliata | verdura | insalata | acqua | birra | macedonia)
+		;
+PIZZA ::= ai (peperoni) |
+	alla (bagna cauda | pasta di mandorle) |
+	alle (cipolle | mandorle) [tartufate | caramellate | candite]
+	;
+
+VIAGGIO ::= ho (fame | sete) | mi scappa la (cacca | pip^IG);
+
+MOSSAKB ::= [----roto^] (
+		M: (calcio [---^balilla] | pugno | destro | sinistro | roundhouse kick) |
+		F: (gomitata | ginocchiata | testata | tallonata | spallata | ditata | polsata | nasata | pisellata)
+	) [rotante | --urticante | ---nucleare | ---ortogonale | ----digitale] [(saltat | girat) ^(M: o | F: a)] [frontale | laterale | nel culo | destr ^(M: o | F: a) | sinistr ^(M: o | F: a)]
+	;
+
+CAMPIONEKB ::= \chuck \norris | \bruce \lee | \steven \seagal | \van \damme | il mio vicino di casa | il postino;
+
+KICKBOXING ::= ((M: il | F: la) MOSSAKB mi (viene | riesce | esce) (malissimo | benissimo | da schifo)).(M|F) |
+	(sto imparando (M: il | F: la) MOSSAKB).(M|F) |
+        [MOMENTO] (ho imparato (M: il | F: la) MOSSAKB).(M|F) |
+	[MOMENTO] (ho incontrato CAMPIONEKB e gli ho (dato | mollato | rifilato | appioppato) un (M: _ | F: ^a) MOSSAKB).(M|F) che si ricorder^A per tutta la vita |
+	((M: il mio | F: la mia) MOSSAKB EC meglio di quell ^(M: o | F: a) di CAMPIONEKB).(M|F) |
+	(per diventare cintura (rossa | nera | verde | gialla | blu | arancione | viola | fuchsia | bordeaux | kaki | rosa | azzurra | marrone | turchese | a pois | di sicurezza | trasparente) devo (migliorare | perfezionare | affinare | potenziare) (M: il mio | F: la mia) MOSSAKB).(M|F)
+	;
+
+SKATE ::= il GIMMICK mi (viene | riesce) (malissimo | benissimo | da schifo) |
+	sto imparando il GIMMICK |
+	[MOMENTO] ho imparato il GIMMICK |
+	[MOMENTO] sono caduto mentre provavo a fare un GIMMICK |
+	un giorno mi riuscir^A questo dannato GIMMICK |
+	adoro fare il GIMMICK |
+	MOMENTO ho fatto un GIMMICK seguito da un GIMMICK [per poi concludere con un GIMMICK] |
+	[MOMENTO] mi sono fatto un male (esagerato | incredibile) cercando di fare un GIMMICK |
+	il GIMMICK EC proprio (un trick | una gimmick) da (pusillanimi | sfigati | principianti | lattanti | poppanti | incapaci) |
+	ti sfido a chi fa il GIMMICK pi^U bello
+	;
+GIMMICK ::= "180" |
+	"270" |
+	"360" |
+	"360 Flip" |
+	"360 Ollie Heelflip" |
+	"360 Ollie Kickflip" |
+	"360 Shuvit" |
+	"5-0 Grind" |
+	"50-50 Grind" |
+	"540" |
+	"540 Flip" |
+	"720" |
+	"720 Flip" |
+	"900" |
+	"Acid Drop" |
+	"Airwalk" |
+	"Alley Oop" |
+	"Alpha Flip" |
+	"Anti Casper Flip" |
+	"Axle Stall" |
+	"Backflip" |
+	"Backside Flip" |
+	"Backside Heelflip" |
+	"Barley Grind" |
+	"Bean Plant" |
+	"Benihana" |
+	"Bertleman Slide" |
+	"Big Heelflip" |
+	"Bigflip" |
+	"Biggerflip" |
+	"Biggerspin" |
+	"Bigspin" |
+	"Blunt" |
+	"Bluntslide" |
+	"Boardslide" |
+	"Body Jar" |
+	"Body Varial" |
+	"Boneless" |
+	"Bubble Flip" |
+	"Bullflip" |
+	"Caballerial" |
+	"Caballerial Flip" |
+	"Camel Flip" |
+	"Cannonball" |
+	"Casper" |
+	"Casper Flip" |
+	"Casperslide" |
+	"Caveman" |
+	"Christ Air" |
+	"Coffin" |
+	"Crail Grab" |
+	"Crail Slide" |
+	"Crailtap" |
+	"Creeper" |
+	"Crooked Grind" |
+	"Crossbone" |
+	"Daffy" |
+	"Darkslide" |
+	"Daydream Flip" |
+	"De Comply" |
+	"Delmar Indy" |
+	"Disaster" |
+	"Disco Flip" |
+	"Double Grab" |
+	"Egg Plant" |
+	"Fastplant" |
+	"Feather Flip" |
+	"Feeble Grind" |
+	"Fingerflip" |
+	"Firecracker" |
+	"Flamingo" |
+	"Forward Flip" |
+	"Frigid Air" |
+	"Front Foot Impossible" |
+	"Frontside Air" |
+	"Frontside Flip" |
+	"Frontside Heelflip" |
+	"Gazelle Flip" |
+	"Gazelle Spin" |
+	"Ghetto Bird" |
+	"Gingersnap" |
+	"Grape Flip" |
+	"Grosman Grab" |
+	"Gymnast Plant" |
+	"Handstand Flip" |
+	"Hang Ten" |
+	"Hardflip" |
+	"Haslam Flip" |
+	"Heelflip" |
+	"Helipop" |
+	"Hippy Jump" |
+	"Ho-Ho" |
+	"Hospital Flip" |
+	"Hurricane" |
+	"Illusion Flip" |
+	"Impossible" |
+	"Indy Grab" |
+	"Invert" |
+	"Inward Heelflip" |
+	"Japan Air" |
+	"Jesus Flip" |
+	"Judo Air" |
+	"Kickback Flip" |
+	"Kickflip" |
+	"Kickturn" |
+	"Kiwi Flip" |
+	"Laser Flip" |
+	"Layback Air" |
+	"Layback Grind" |
+	"Lien Air" |
+	"Lipslide" |
+	"Madonna" |
+	"Manual" |
+	"McTwist" |
+	"Melancholy Grab" |
+	"Method Air" |
+	"Miller Flip" |
+	"Mute Air" |
+	"Nail Slide" |
+	"Nerd Flip" |
+	"Nightmare Flip" |
+	"No Comply" |
+	"Nollie" |
+	"Nose Grab" |
+	"Nose Manual" |
+	"Nose Pick" |
+	"Nose Stall" |
+	"Noseblunt" |
+	"Noseblunt Slide" |
+	"Nosebone" |
+	"Nosegrind" |
+	"Noseslide" |
+	"Nuclear Grab" |
+	"Ollie" |
+	"Ollie North" |
+	"Ollie South" |
+	"Ollie to Fakie" |
+	"One Foot Manual" |
+	"One Wheel Manual" |
+	"Orange Flip" |
+	"Overcrook Grind" |
+	"Overturn" |
+	"Pivot" |
+	"Pivot Fakie" |
+	"Plasma Spin" |
+	"Pogo" |
+	"Pop Shuvit" |
+	"Power Ollie" |
+	"Powerslide" |
+	"Pressure Flip" |
+	"Primo" |
+	"Primo Grind" |
+	"Pull Up" |
+	"Rail Flip" |
+	"Roastbeef Grab" |
+	"Rock and Roll" |
+	"Rock to Fakie" |
+	"Rocket Air" |
+	"Roll In" |
+	"Sacktap" |
+	"Sad Plant" |
+	"Sal Flip" |
+	"Salad Grind" |
+	"Saran Wrap" |
+	"Seatbelt Grab" |
+	"Semiflip" |
+	"Sex Change" |
+	"Shuvit" |
+	"Sigma Flip" |
+	"Slash Grind" |
+	"Slob Air" |
+	"Smith Grind" |
+	"Stalefish Grab" |
+	"Staple Gun" |
+	"Stiffy" |
+	"Superman Grab" |
+	"Suski Grind" |
+	"Sweeper" |
+	"Tail Grab" |
+	"Tail Stall" |
+	"Tailblock" |
+	"Tailblock Grind" |
+	"Tailbone" |
+	"Tailslide" |
+	"Texas Plant" |
+	"Texas Two-Step" |
+	"Tic-Tac" |
+	"Toeflip" |
+	"Tuck Knee" |
+	"Underflip" |
+	"Varial" |
+	"Varial Heelflip" |
+	"Varial Kickflip" |
+	"Willy Grind"
+	;
