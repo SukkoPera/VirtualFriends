@@ -1,4 +1,4 @@
-(* LAST UPDATE: 23/07/2017 *)
+(* LAST UPDATE: 06/06/2018 *)
 
 I ::= "title:    Virtual Giustino\n"
     ^ "author:   Gurteee &lt;software@sukkology.net&gt;\n"
@@ -110,7 +110,7 @@ MATERIALE ::= >MATERIALE1 | >MATERIALE2;
 (*
 FIAT2 ::= COMPONENTE.S della mia MARCHIOFIAT fa "TRUC TRUC" |
       >(non funziona (S: _ | P: ^no) PIU COMPONENTE della mia MARCHIOFIAT).(S|P) |
-      si sono rotti [di nuovo] COMPONENTE.P della mia MARCHIOFIAT;
+      (si (S: E rotto | P: sono rotti) [di nuovo] COMPONENTE della mia MARCHIOFIAT).(S|P);
 *)
 
 FIAT3 ::= "io non comprer" ^O "mai" [PIU] MARCHIOFIAT |
@@ -119,14 +119,17 @@ FIAT3 ::= "io non comprer" ^O "mai" [PIU] MARCHIOFIAT |
 	la mia MARCHIOFIAT cade a (pezzi | brandelli) |
 	"ma figurati se compro un'altra" MARCHIOFIAT ^", con tutto quel che mi" E "successo" |
 	"forrrza," MARCHIOFIAT ^", vai" |
-	EC scaduta la garanzia della mia MARCHIOFIAT;
+	EC scaduta la garanzia della mia MARCHIOFIAT |
+	"basta, ultima" MARCHIOFIAT ^ "!"
+	;
 
-COMPONENTE2 ::= MS: (il >(freno | cambio | condizionatore | differenziale | vivavoce | radiatore | carburatore) | l'^(acceleratore | accendisigari)) |
+COMPONENTE2 ::= MS: (il >(freno | cambio | condizionatore | differenziale | vivavoce | radiatore | carburatore | parabrezza | lunotto) | l'^(acceleratore | accendisigari)) |
 		FS: la >(frizione | batteria | pompa >(del gasolio | della benzina | dell'acqua) | centralina) |
-		MP: (i >(vetri | tergicristalli | finestrini | paraurti | cofani | volanti | fari [allo \xeno] | lavafari | cilindri | pistoni) | gli iniettori) |
-		FP: le >(ruote | prese d'aria | candele | valvole);
+		MP: (i >(vetri | tergicristalli | finestrini | paraurti | cofani | volanti | fari [allo \xeno] | lavafari | cilindri | pistoni | sensori di parcheggio) | gli iniettori) |
+		FP: le >(ruote | prese d'aria | candele | valvole | luci di retromarcia);
 
-FIAT2 ::= (si (MS: E | FS: E | MP: sono | FP: sono) (rott | frantumat | graffiat | ingolfat | lacerat) ^ (MS: o | FS: a | MP: i | FP: e) [di nuovo] COMPONENTE2 della mia MARCHIOFIAT).(MS|FS|MP|FP) |
+FIAT2 ::= ((((MS: E | FS: E | MP: sono | FP: sono) (esplos | implos | sublimat) ^ (MS: o | FS: a | MP: i | FP: e)) | 
+	(si (MS: E | FS: E | MP: sono | FP: sono) (rott | frantumat | graffiat | ingolfat | lacerat | disintegrat | disgregat | vaporizzat | smembrat) ^ (MS: o | FS: a | MP: i | FP: e))) [di nuovo] COMPONENTE2 della mia MARCHIOFIAT).(MS|FS|MP|FP) |
 	(COMPONENTE2 della mia MARCHIOFIAT fa (MP: ^nno | FP: ^nno) "TRUC TRUC").(MS|FS|MP|FP) |
 	({non funziona (MP: ^no | FP: ^no) PIU} {COMPONENTE2 della mia MARCHIOFIAT}).(MS|FS|MP|FP) |
 	(la MARCHIOFIAT fa COMPONENTE2 MATERIALE).(MP|FP);
@@ -144,8 +147,11 @@ AGGETTIVO ::= >(>(bell | muscolos | maestos | virtuos | esagerat| superlativ) ^(
 POLSKI ::= non E vero che "\"" ^IMPRONUNCIABILE ^"\"" E "impronunciabile";
 IMPRONUNCIABILE ::= > >> (+sz | ++rz | ++k | +w | +sc | EXTRAPOLSKI) << (^ IMPRONUNCIABILE | ----_);
 
-MACCHINA ::= sono indeciso se cambiare la mia MARCHIOFIAT con un MACCHINONE o un MACCHINONE ^". Mah, mi sa che li prender" ^O "entrambi, intanto" RICCO;
-MACCHINONE ::= \ (x ^(3 | 5) | pajero | hummer | ferrari | lamborghini | "TT" | maserati | classe \e | de \tomaso | lotus | pagani | tesla);
+MACCHINA1 ::= sono indeciso se cambiare la mia MARCHIOFIAT con un (MACCHINONE | MACCHINONEFIAT) o un (MACCHINONE | MACCHINONEFIAT) ^". Mah, mi sa che li prender" ^O "entrambi, intanto" RICCO;
+MACCHINA2 ::= stavo pensando di cambiare la mia auto con un MACCHINONEFIAT ^", ma forse" E "meglio di no, intanto sarebbe sempre" MARCHIOFIAT ^"!";
+MACCHINA ::= >(MACCHINA1 | MACCHINA2);
+MACCHINONE ::= \ (x ^(3 | 5) | pajero | hummer | lamborghini | "TT" | classe \e | de \tomaso | lotus | pagani | tesla);
+MACCHINONEFIAT ::= \ (ferrari | maserati | alfa \romeo | lancia);
 
 ALLERGIA ::= sono (allergico | intollerante) OGGALLERGIA;
 OGGALLERGIA ::= >> al >(formaggio ma non al (burro | ^la mozzarella) | (bianco | rosso) dell'uovo | tonno | buon senso | \mc ^ \donald's | frumento | mais | grano [^turco] | chinotto | ginger) |
@@ -238,7 +244,8 @@ VAKKATASEMPLICE ::= [ci vediamo ^","] "a prestissimo!" |
 	"Puoi urtarmi tutte le volte che vuoi." |
 	"Tranquillo, era solo aria." |
 	"Ma quale ricco e snob? Ti ricordo che sono solito abbeverarmi al cesso!" |
-	"Io sono Ges" ^U ^"."
+	"Io sono Ges" ^U ^"." |
+	"Ultimamente trovo che ci sia stato qualche miglioramento nel mio cervello."
 	;
 
 CIBO ::= "certamente che mangio" |
@@ -251,9 +258,10 @@ CIBO ::= "certamente che mangio" |
 CIBOSAFE ::= M: (gelato | [contro^] filetto [di (pollo | maiale | vitello | anatra)] | pesce [^spada] | posacenere | tartufo) |
 		F: (carne | tagliata | verdura | insalata | acqua | birra | macedonia)
 		;
-PIZZA ::= ai (peperoni) |
-	alla (bagna cauda | pasta di mandorle) |
-	alle (cipolle | mandorle) [tartufate | caramellate | candite]
+PIZZA ::= al (pistacchio) |
+	ai (peperoni) |
+	alla (bagna cauda | pasta di mandorle | mortadella) |
+	alle (cipolle | mandorle | noci | nocciole) [tartufate | caramellate | candite]
 	;
 
 VIAGGIO ::= ho (fame | sete) | mi scappa la (cacca | pip^IG);
