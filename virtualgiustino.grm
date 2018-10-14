@@ -270,7 +270,7 @@ VIAGGIO ::= ho (fame | sete) | mi scappa la (cacca | pip^IG);
 MOSSAKB ::= [----roto^] (
 		M: (calcio [---^balilla] | pugno | destro | sinistro | roundhouse kick) |
 		F: (gomitata | ginocchiata | testata | tallonata | spallata | ditata | polsata | nasata | pisellata)
-	) [rotante | --urticante | ---nucleare | ---ortogonale | ----digitale] [((saltat | girat) ^(M: o | F: a)) | a uncino] [frontale | laterale | nel culo | destr ^(M: o | F: a) | sinistr ^(M: o | F: a)]
+	) [rotante | --urticante | ---nucleare | ---ortogonale | ----digitale] [((saltat | girat) ^(M: o | F: a)) | a uncino | -ad ascia | --di mulo] [frontale | laterale | nel culo | destr ^(M: o | F: a) | sinistr ^(M: o | F: a)]
 	;
 
 CAMPIONEKB ::= \chuck \norris | \bruce \lee | \steven \seagal | \van \damme | il mio vicino di casa | il postino;
