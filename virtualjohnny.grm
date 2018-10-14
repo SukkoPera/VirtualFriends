@@ -1,4 +1,4 @@
-(* LAST UPDATE: 30/06/2017 *)
+(* LAST UPDATE: 14/10/2018 *)
 
 I ::= "title:    Virtual Johnny\n"
     ^ "author:   Gurteee &lt;software@sukkology.net&gt;\n"
@@ -41,9 +41,9 @@ FRASE ::= >> FTIPO01 ^"." <<;
 MOMENTO ::= oggi [pomeriggio] | stamattina | stasera | domani;
 MOMPASS ::= [l'altro] ieri | sabato scorso | domenica scorsa | lo scorso weekend;
 VERBO1 ::= E ((mort | mancat | --esplos | ---implos) ^(M: o | F: a) | (rimast ^(M: o | F: a) (a piedi | senza benzina)));
-PARTICIPIO ::= (uccis | ammazzat | suicidat | crocifiss | impiccat | gambizzat | investit | lobotomizzat | sparat | mutilat | squartat | imbalsamat | bruciat | incendiat | impalat);
+PARTICIPIO ::= (uccis | ammazzat | assassinat | suicidat | crocifiss | impiccat | gambizzat | investit | lobotomizzat | sparat | mutilat | squartat | imbalsamat | bruciat | incendiat | impalat);
 VERBO2 ::= si E PARTICIPIO ^(M: o | F: a);
-VERBO3 ::= hanno (PARTICIPIO ^o | bruciato sul rogo | condannato a morte | beccato che si drogava | chiamato alle armi | denunciato | arrestato | portato in caserma);
+VERBO3 ::= hanno (PARTICIPIO ^o | bruciato sul rogo | condannato a morte | beccato che si drogava | chiamato alle armi | denunciato | arrestato | portato in caserma | riempito di mazzate);
 MATERIA ::= latino | lettere | storia | matematica | filosofia | disegno | storia dell'arte | inglese | francese | tedesco | swahili | polacco | ceco | rumeno | bulgaro | russo;
 PERSONA1 ::= M: (vicino | gatto | cane | gnu | struzzo | toro | manzo | vitello | ornitorinco | pappagallo | roditore | criceto | muflone | girasole | professore di MATERIA)
 	| F: (vicina | mucca | capra | zebra | professoressa di MATERIA)
