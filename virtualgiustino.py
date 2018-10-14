@@ -15,7 +15,7 @@ class VGTwitterInterface (TweepyTwitterInterface):
 	_consumer_secret = "<fill_me>"
 	_access_token = "<fill_me>"
 	_access_token_secret = "<fill_me>"
-	
+
 	def __init__ (self, logger):
 		super (VGTwitterInterface, self).__init__ (logger)
 		self.setOAuthKeys (self._consumer_key, self._consumer_secret, self._access_token, self._access_token_secret)
@@ -58,7 +58,7 @@ class VirtualGiustino (TwitterBot):
 		self.setTwitterInterface (intf)
 		thisScript = os.path.realpath (__file__)
 		self._mypath = os.path.dirname (thisScript)		# .grm file will be in same dir as executable
-		
+
 	def makeTweet (self, maxlen = TwitterBot.MAX_TWEET_LEN, startingSymbol = None):
 		try:
 			while True:
@@ -76,11 +76,11 @@ class VirtualGiustino (TwitterBot):
 				for pat, rep in self._REPLACEMENTS.iteritems ():
 					pat = r"\b%s\b" % pat			# Only match whole words
 					perla = re.sub (pat, rep, perla, flags = re.IGNORECASE)
-				
+
 				# Replace HTML entities
 				parser = HTMLParser.HTMLParser ()
 				perla = parser.unescape (perla)
-				
+
 				if len (perla) <= maxlen:
 					break
 		except (OSError, subprocess.CalledProcessError) as ex:
@@ -103,7 +103,7 @@ class VirtualGiustino (TwitterBot):
 				break
 
 		if perla is None:
-			# No specific reply 
+			# No specific reply
 			perla = self.makeTweet (self.MAX_TWEET_LEN - len (msg), "RISPOSTAMENZIONETWITTER")
 
 		msg += perla
@@ -112,7 +112,7 @@ class VirtualGiustino (TwitterBot):
 
 if __name__ == "__main__":
 	from optparse import OptionParser
-	
+
 	parser = OptionParser (usage = "usage: %prog [options]", description = "Implements the Virtual Giustino Twitter Bot", version = "%s" % VirtualGiustino.VERSION)
 	parser.add_option ("-c", "--check", action = "store_true", help = "Check for mentions and reply to them", default = False)
 	parser.add_option ("-t", "--tweet", action = "store_true", help = "Tweet a new message", default = False)
@@ -121,13 +121,13 @@ if __name__ == "__main__":
 
 	if options.check or options.tweet:
 		vgiustino = VirtualGiustino ()
-		
+
 		if options.check:
 			vgiustino.checkForMentions ()
-			
+
 		if options.tweet:
 			vgiustino.randomTweet ()
-		
+
 		ret = 0
 	else:
 		parser.print_help ()
