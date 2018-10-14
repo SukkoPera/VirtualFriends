@@ -1,4 +1,4 @@
-(* LAST UPDATE: 06/06/2018 *)
+(* LAST UPDATE: 14/10/2018 *)
 
 I ::= "title:    Virtual Giustino\n"
     ^ "author:   Gurteee &lt;software@sukkology.net&gt;\n"
@@ -128,7 +128,7 @@ COMPONENTE2 ::= MS: (il >(freno | cambio | condizionatore | differenziale | viva
 		MP: (i >(vetri | tergicristalli | finestrini | paraurti | cofani | volanti | fari [allo \xeno] | lavafari | cilindri | pistoni | sensori di parcheggio) | gli iniettori) |
 		FP: le >(ruote | prese d'aria | candele | valvole | luci di retromarcia);
 
-FIAT2 ::= ((((MS: E | FS: E | MP: sono | FP: sono) (esplos | implos | sublimat) ^ (MS: o | FS: a | MP: i | FP: e)) | 
+FIAT2 ::= ((((MS: E | FS: E | MP: sono | FP: sono) (esplos | implos | sublimat) ^ (MS: o | FS: a | MP: i | FP: e)) |
 	(si (MS: E | FS: E | MP: sono | FP: sono) (rott | frantumat | graffiat | ingolfat | lacerat | disintegrat | disgregat | vaporizzat | smembrat) ^ (MS: o | FS: a | MP: i | FP: e))) [di nuovo] COMPONENTE2 della mia MARCHIOFIAT).(MS|FS|MP|FP) |
 	(COMPONENTE2 della mia MARCHIOFIAT fa (MP: ^nno | FP: ^nno) "TRUC TRUC").(MS|FS|MP|FP) |
 	({non funziona (MP: ^no | FP: ^no) PIU} {COMPONENTE2 della mia MARCHIOFIAT}).(MS|FS|MP|FP) |
@@ -148,7 +148,7 @@ POLSKI ::= non E vero che "\"" ^IMPRONUNCIABILE ^"\"" E "impronunciabile";
 IMPRONUNCIABILE ::= > >> (+sz | ++rz | ++k | +w | +sc | EXTRAPOLSKI) << (^ IMPRONUNCIABILE | ----_);
 
 MACCHINA1 ::= sono indeciso se cambiare la mia MARCHIOFIAT con un (MACCHINONE | MACCHINONEFIAT) o un (MACCHINONE | MACCHINONEFIAT) ^". Mah, mi sa che li prender" ^O "entrambi, intanto" RICCO;
-MACCHINA2 ::= stavo pensando di cambiare la mia auto con un MACCHINONEFIAT ^", ma forse" E "meglio di no, intanto sarebbe sempre" MARCHIOFIAT ^"!";
+MACCHINA2 ::= stavo pensando di cambiare la mia auto con un MACCHINONEFIAT ^", ma forse" E "meglio di no, intanto sarebbe sempre" MARCHIOFIAT;
 MACCHINA ::= >(MACCHINA1 | MACCHINA2);
 MACCHINONE ::= \ (x ^(3 | 5) | pajero | hummer | lamborghini | "TT" | classe \e | de \tomaso | lotus | pagani | tesla);
 MACCHINONEFIAT ::= \ (ferrari | maserati | alfa \romeo | lancia);
@@ -160,7 +160,8 @@ OGGALLERGIA ::= >> al >(formaggio ma non al (burro | ^la mozzarella) | (bianco |
 		alle pere |
 		allo (zenzero | zafferano) |
 		al cumino |
-		alla cocaina | all'eroina | al crack | alla marijuana | all'hashish | al fumo | alla cannabis
+		alla cocaina | all'eroina | al crack | alla marijuana | all'hashish | al fumo | alla cannabis |
+		alle MARCHIOFIAT
 		<<;
 
 STRUMENTO ::= (sax | piano | tastiera | oboe | [contro^] fagotto | violino | batteria | gong | tromba | trombone | [basso^] tuba | susafono | xilofono | vibrafono | marimba | clarinetto | flauto [(traverso | dolce)]);
@@ -178,7 +179,7 @@ GRUPPO ::= il mio gruppo preferito sono GRUPPOKOMU |
 		"A ja ljublju SSSR";
 GRUPPOKOMU ::= i \ (++"CCCP" | "CSI" | persiana \jones | punkreas | porno \riviste) |
 			gli \ ("Ska-P" | africa \unite);
-			
+
 MUSICA ::= >(MUSICA1 | MUSICA2 | GRUPPO);
 
 KOMUNISMO ::= KOMUNISTA E il mio mentore | ho votato KOMUNISTA | alle prossime elezioni voter^O KOMUNISTA;
@@ -269,7 +270,7 @@ VIAGGIO ::= ho (fame | sete) | mi scappa la (cacca | pip^IG);
 MOSSAKB ::= [----roto^] (
 		M: (calcio [---^balilla] | pugno | destro | sinistro | roundhouse kick) |
 		F: (gomitata | ginocchiata | testata | tallonata | spallata | ditata | polsata | nasata | pisellata)
-	) [rotante | --urticante | ---nucleare | ---ortogonale | ----digitale] [(saltat | girat) ^(M: o | F: a)] [frontale | laterale | nel culo | destr ^(M: o | F: a) | sinistr ^(M: o | F: a)]
+	) [rotante | --urticante | ---nucleare | ---ortogonale | ----digitale] [((saltat | girat) ^(M: o | F: a)) | a uncino] [frontale | laterale | nel culo | destr ^(M: o | F: a) | sinistr ^(M: o | F: a)]
 	;
 
 CAMPIONEKB ::= \chuck \norris | \bruce \lee | \steven \seagal | \van \damme | il mio vicino di casa | il postino;
@@ -279,7 +280,7 @@ KICKBOXING ::= ((M: il | F: la) MOSSAKB mi (viene | riesce | esce) (malissimo | 
         [MOMENTO] (ho imparato (M: il | F: la) MOSSAKB).(M|F) |
 	[MOMENTO] (ho incontrato CAMPIONEKB e gli ho (dato | mollato | rifilato | appioppato) un (M: _ | F: ^a) MOSSAKB).(M|F) che si ricorder^A per tutta la vita |
 	((M: il mio | F: la mia) MOSSAKB EC meglio di quell ^(M: o | F: a) di CAMPIONEKB).(M|F) |
-	(per diventare cintura (rossa | nera | verde | gialla | blu | arancione | viola | fuchsia | bordeaux | kaki | rosa | azzurra | marrone | turchese | a pois | di sicurezza | trasparente) devo (migliorare | perfezionare | affinare | potenziare) (M: il mio | F: la mia) MOSSAKB).(M|F)
+	(per diventare cintura (rossa | nera | verde | gialla | blu | arancione | viola | fuchsia | bordeaux | kaki | rosa | azzurra | marrone | turchese | a pois | di sicurezza | trasparente) devo (migliorare | perfezionare | affinare | potenziare | rivedere) (M: il mio | F: la mia) MOSSAKB).(M|F)
 	;
 
 SKATE ::= il GIMMICK mi (viene | riesce) (malissimo | benissimo | da schifo) |
