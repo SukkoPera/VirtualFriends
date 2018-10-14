@@ -91,7 +91,7 @@ class VirtualGiustino (TwitterBot):
 	def handleMention (self, tweet, author, timestamp):
 		# Prepare reply mentioning users
 		users = self._getMentionedUsers (tweet, author, True)
-		msg = ", ".join (users) + ": "
+		msg = " ".join (users) + " "
 
 		# Check if we have a specific reply first
 		perla = None
