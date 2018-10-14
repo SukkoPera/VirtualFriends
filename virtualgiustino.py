@@ -83,7 +83,7 @@ class VirtualGiustino (TwitterBot):
 				
 				if len (perla) <= maxlen:
 					break
-		except subprocess.CalledProcessError as ex:
+		except (OSError, subprocess.CalledProcessError) as ex:
 			self.logger.error ("Cannot run Polygen: %s" % str (ex))
 			perla = "Sto sbarellando!"
 		return perla
