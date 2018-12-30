@@ -115,18 +115,18 @@ FIAT2 ::= "io non comprer" ^O "mai" [PIU] MARCHIOFIAT |
 	"basta, ultima" MARCHIOFIAT ^ "!"
 	;
 
-COMPONENTE ::= MS: (motore | freno | cambio | condizionatore | differenziale | vivavoce | radiatore | carburatore | parabrezza | lunotto)
-             | MSV: (acceleratore | accendisigari)
-             | FS: (frizione | batteria | pompa >(del gasolio | della benzina | dell'acqua) | centralina | portiera (an|pos)^teriore (de|sini)^stra)
-             | MP: (vetri | tergicristalli | finestrini | paraurti | cofani | volanti | fari [allo \xeno] | lavafari | cilindri | pistoni | sensori di parcheggio)
-             | MPV: (iniettori)
-             | FP: (ruote | prese d'aria | candele | valvole | luci di retromarcia)
+COMPONENTE ::= MS: >(motore | freno | cambio | condizionatore | differenziale | vivavoce | radiatore | carburatore | parabrezza | lunotto)
+             | MSV: >(acceleratore | accendisigari)
+             | FS: >(frizione | batteria | pompa (del gasolio | della benzina | dell'acqua) | centralina | portiera (an|pos)^teriore (de|sini)^stra)
+             | MP: >(vetri | tergicristalli | finestrini | paraurti | cofani | volanti | fari [allo \xeno] | lavafari | cilindri | pistoni | sensori di parcheggio)
+             | MPV: >(iniettori)
+             | FP: >(ruote | prese d'aria | candele | valvole | luci di retromarcia)
 		     ;
 
-COMPONENTE2 ::= MS: (il >(COMPONENTE.MS) | l'^(COMPONENTE.MSV))
-              |	FS: la >(COMPONENTE.FS)
-              | MP: (i >(COMPONENTE.MP) | gli (COMPONENTE.MPV))
-              | FP: le >(COMPONENTE.FP)
+COMPONENTE2 ::= MS: (il COMPONENTE.MS | l'^ COMPONENTE.MSV) .
+              |	FS: (la COMPONENTE.FS) .
+              | MP: (i COMPONENTE.MP | gli COMPONENTE.MPV) .
+              | FP: (le COMPONENTE.FP) .
               ;
 
 FIAT3 ::= ((((MS: E | FS: E | MP: sono | FP: sono) (esplos | implos | sublimat) ^ (MS: o | FS: a | MP: i | FP: e))
@@ -167,7 +167,15 @@ OGGALLERGIA ::= >> al >(formaggio ma non al (burro | ^la mozzarella) | (bianco |
 		alle MARCHIOFIAT
 		<<;
 
-STRUMENTO ::= (sax | piano | tastiera | oboe | [contro^] fagotto | violino | batteria | gong | tromba | trombone | [basso^] tuba | susafono | xilofono | vibrafono | marimba | clarinetto | flauto [(traverso | dolce)]);
+STRUMENTO ::= MS: >(sax [soprano|tenore|contralto|baritono]| piano [^forte] [--a coda] | clavicembalo | [contro^] fagotto | violino | violoncello | contrabbasso | gong | trombone | bassotuba | susafono | vibrafono | [---inutile] clarinetto | flauto [(traverso | dolce)] | basso [acustico|--elettrico] [a NUMERO corde] | dulcimer | mandolino | sintetizzatore | glockenspiel)
+           | MSX: >(xilofono)
+           | MSV: >(oboe)
+           | FS: >(tastiera | batteria | tromba | tuba | marimba | chitarra [classica|elettrica|acustica] [a NUMERO corde] | viola)
+           ;
+(* STRUMENTOART ::= il STRUMENT.MS | lo (STRUMENT.MSX) | la STRUMENT.FS | l'^ STRUMENT.FSV; *)
+STRUMENTOMF ::= M: >(STRUMENTO.(MS|MSX|MSV)) .
+              | >(F: STRUMENTO.FS) .
+              ;
 MUSICA1 ::= ho comprato un (corso di | metodo per) STRUMENTO | ho iniziato ad andare a lezione di STRUMENTO;
 MUSICA2 ::= (la chitarra | il basso) mi fa paura | gli accordi mi fanno paura;
 
@@ -191,7 +199,7 @@ KOMUNISTA ::= [il \compagno] \( stalin | lenin | marx | khrushchev | walter \ulb
 CIFRAINIZIALE ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 CIFRA ::= 0 | CIFRAINIZIALE;
 NUMERONE ::= millemila | ventordici;
-NUMERO ::= (CIFRAINIZIALE ^ CIFRA [^CIFRA]) | NUMERONE;
+NUMERO ::= (CIFRAINIZIALE ^ CIFRA [^CIFRA]) | --NUMERONE;
 DECIMALE ::= CIFRAINIZIALE ^ CIFRA ^"." ^ CIFRAINIZIALE;
 VAKKATASEMPLICE ::= [ci vediamo ^","] "a prestissimo!" |
 	"Come come come???" |
@@ -220,7 +228,7 @@ VAKKATASEMPLICE ::= [ci vediamo ^","] "a prestissimo!" |
 	"Ho comprato il cofanetto della" (millemillesima | ventordicesima) "serie dei Simpson." |
 	"Non posso venire a casa tua in moto" PERCHE "ci sono" DECIMALE (deci | centi | milli | micro | nano | pico | femto) ^metri "di ghiaia." |
 	"Il" (maggior | peggior) "terrore dei motociclisti" E "la ghiaia." |
-	"Domani vado a comprare" (un'altra | altre CIFRAINIZIALE) (moto | auto) ^"." |
+	"Domani vado a comprare" ((un'altra | altre CIFRAINIZIALE) (moto | auto)|(M:(un|un altro)|F:(una|un'altra)) STRUMENTOMF).(M|F) ^"." |
 	EC "colpa del sistema." |
 	"Gasteropodi! Semplice, no?" |
 	"Stasera non voglio partecipare a lezioni di otorinolaringoiatria." |
