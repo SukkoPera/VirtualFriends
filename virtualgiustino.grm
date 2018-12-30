@@ -80,6 +80,8 @@ AMICO ::= AMICOUMANO (* | AMICOTWITTER *);
 NEMICO ::= batte | max | il tipo di "La Spezia" | claudio | alessandra;
 *)
 
+FREQUENZA ::= di nuovo|ancora una volta|per (l'ennesima|la ventordicesima) volta;
+
 MOMENTO ::= (l'altro giorno | ieri | stamattina | una volta);
 
 BRUTALE ::= non uso la "Brutale" PERCHE >(E [troppo] >([s^] comoda | alta | bassa | --verde | --blu | troppo moto) | ha la sella [troppo] >(molle | dura) | fa [troppo] >(caldo | freddo) | ha [troppe [poche]] ruote | ha le ruote [troppo] [s^] gonfie | il >(gatto | cane | criceto | pesce rosso | pappagallo) non vuole).;
@@ -97,23 +99,13 @@ CAUSA ::= (hai|avete|hanno) pestato i piedi alla persona sbagliata |
 	devo chiamare AVVOCATO ^"?";
 
 MARCHIOFIAT := "TIAF";
-(*
-FIAT ::= la MARCHIOFIAT fa COMPONENTE.P MATERIALE;
-COMPONENTE ::= S: >(il freno | l'acceleratore | la frizione | il cambio | il condizionatore | il differenziale | la batteria | l'accendisigari | il vivavoce) | P: >(i vetri | i tergicristalli | i finestrini | i paraurti | i cofani | le ruote | i volanti | le prese d'aria | i fari [allo \xeno] | i lavafari);
-*)
 FIAT ::= FIAT2 | FIAT3;
 SCELTA ::= di (seconda | terza | quarta | quinta | ennesima) (scelta | mano);
 MATERIALE1 ::= in (polistirolo [espanso] | plastica | terracotta | ceramica | porcellana | gomma [^piuma] | plexiglass | "PVC" | ghisa | pelle [di topo [morto]]) [cinese] [SCELTA];
 MATERIALE2 ::= con (il >(pongo | "DAS") [cinese] | i topi morti [cinesi]) [SCELTA];
 MATERIALE ::= >MATERIALE1 | >MATERIALE2;
 
-(*
-FIAT2 ::= COMPONENTE.S della mia MARCHIOFIAT fa "TRUC TRUC" |
-      >(non funziona (S: _ | P: ^no) PIU COMPONENTE della mia MARCHIOFIAT).(S|P) |
-      (si (S: E rotto | P: sono rotti) [di nuovo] COMPONENTE della mia MARCHIOFIAT).(S|P);
-*)
-
-FIAT3 ::= "io non comprer" ^O "mai" [PIU] MARCHIOFIAT |
+FIAT2 ::= "io non comprer" ^O "mai" [PIU] MARCHIOFIAT |
 	si E rotto un [altro] finestrino della mia MARCHIOFIAT |
 	ieri ho portato [di nuovo] la mia MARCHIOFIAT in officina |
 	la mia MARCHIOFIAT cade a (pezzi | brandelli) |
@@ -123,16 +115,27 @@ FIAT3 ::= "io non comprer" ^O "mai" [PIU] MARCHIOFIAT |
 	"basta, ultima" MARCHIOFIAT ^ "!"
 	;
 
-COMPONENTE2 ::= MS: (il >(freno | cambio | condizionatore | differenziale | vivavoce | radiatore | carburatore | parabrezza | lunotto) | l'^(acceleratore | accendisigari)) |
-		FS: la >(frizione | batteria | pompa >(del gasolio | della benzina | dell'acqua) | centralina) |
-		MP: (i >(vetri | tergicristalli | finestrini | paraurti | cofani | volanti | fari [allo \xeno] | lavafari | cilindri | pistoni | sensori di parcheggio) | gli iniettori) |
-		FP: le >(ruote | prese d'aria | candele | valvole | luci di retromarcia);
+COMPONENTE ::= MS: (motore | freno | cambio | condizionatore | differenziale | vivavoce | radiatore | carburatore | parabrezza | lunotto)
+             | MSV: (acceleratore | accendisigari)
+             | FS: (frizione | batteria | pompa >(del gasolio | della benzina | dell'acqua) | centralina | portiera (an|pos)^teriore (de|sini)^stra)
+             | MP: (vetri | tergicristalli | finestrini | paraurti | cofani | volanti | fari [allo \xeno] | lavafari | cilindri | pistoni | sensori di parcheggio)
+             | MPV: (iniettori)
+             | FP: (ruote | prese d'aria | candele | valvole | luci di retromarcia)
+		     ;
 
-FIAT2 ::= ((((MS: E | FS: E | MP: sono | FP: sono) (esplos | implos | sublimat) ^ (MS: o | FS: a | MP: i | FP: e)) |
-	(si (MS: E | FS: E | MP: sono | FP: sono) (rott | frantumat | graffiat | ingolfat | lacerat | disintegrat | disgregat | vaporizzat | smembrat) ^ (MS: o | FS: a | MP: i | FP: e))) [di nuovo] COMPONENTE2 della mia MARCHIOFIAT).(MS|FS|MP|FP) |
-	(COMPONENTE2 della mia MARCHIOFIAT fa (MP: ^nno | FP: ^nno) "TRUC TRUC").(MS|FS|MP|FP) |
-	({non funziona (MP: ^no | FP: ^no) PIU} {COMPONENTE2 della mia MARCHIOFIAT}).(MS|FS|MP|FP) |
-	(la MARCHIOFIAT fa COMPONENTE2 MATERIALE).(MP|FP);
+COMPONENTE2 ::= MS: (il >(COMPONENTE.MS) | l'^(COMPONENTE.MSV))
+              |	FS: la >(COMPONENTE.FS)
+              | MP: (i >(COMPONENTE.MP) | gli (COMPONENTE.MPV))
+              | FP: le >(COMPONENTE.FP)
+              ;
+
+FIAT3 ::= ((((MS: E | FS: E | MP: sono | FP: sono) (esplos | implos | sublimat) ^ (MS: o | FS: a | MP: i | FP: e))
+        | (si (MS: E | FS: E | MP: sono | FP: sono) (rott | frantumat | graffiat | ingolfat | lacerat | disintegrat | disgregat | vaporizzat | smembrat) ^ (MS: o | FS: a | MP: i | FP: e))) [FREQUENZA] COMPONENTE2 della mia MARCHIOFIAT).(MS|FS|MP|FP)
+        | (COMPONENTE2 della mia MARCHIOFIAT fa (MP: ^nno | FP: ^nno) "TRUC TRUC").(MS|FS|MP|FP)
+        | ({non funziona (MP: ^no | FP: ^no) PIU} {COMPONENTE2 della mia MARCHIOFIAT}).(MS|FS|MP|FP)
+        | (la MARCHIOFIAT fa COMPONENTE2 MATERIALE).(MP|FP)
+        | sulla mia MARCHIOFIAT si E accesa [FREQUENZA] la spia "\"" ^\sostituire >>(COMPONENTE|--auto)<< ^"\""
+        ;
 
 NARCISISMO ::= (ho ORGANO PIU AGGETTIVO).(MS|FS|MP|FP) de ^ >((M1: (l mondo | ll'universo | l pianeta | l cosmo) | F1: >(lla "Terra" | lla galassia)) [inter ^(M1: o | F1: a)]).(M1|F1);
 NARCISISMOPETTO ::= ho il petto PIU AGGETTIVO.MS de ^ >((M: (l mondo | ll'universo | l pianeta | l cosmo) | F: >(lla "Terra" | lla galassia | lla storia [universale])) [inter ^(M: o | F: a)]).(M|F);
